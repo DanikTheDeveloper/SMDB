@@ -1,0 +1,68 @@
+----*************************************************************
+--															READ ME FILE
+-- Project By Daniyar Umuraliev and Jacob Tong
+-- ENSC 252 Final Project Fall 2021
+
+
+--															ACKNOWLEDGEMENTS
+-- Thank you to Anita Tino and Paige Tuttosi for helping us finish the assignment and help us debug. 
+-- Kudos to Daniyar Umuraliev and Jacob Tong, a multicultural team of geniuses who rose to the occasion
+-- to solve society's problems. Again.
+-- 
+--
+--	Project Description and User Manual
+	-- Hi there! Our project is a scrolling message display board, or SMDB for short
+	-- Our project has four programs:
+	--	1) Crawling Snake R->L
+	-- 2) Crawling Snake L->R
+	-- 3) Fly in a Box
+	-- 4) MSG
+--
+-- 															USER MANUAL
+-- Please refer to the ModelSim Altera DE2-115 FPGA board	
+
+-- OVERVIEW
+-- SW(3) to SW(0) control what program is running
+-- SW(17) to SW(16) control speed of the SMDB
+-- SW(15) is a hard reset
+-- SW(14) is a soft reset
+-- Key(3) is a pause button
+-- LEDG(3) to LEDG(0) will display how many programs have run in binary code. 
+--				 ex) LEDG(3) ON, LEDG(2) OFF, LEDG(1) OFF, LEDG(0) ON 	=  5 programs have been executed
+-- SW are ON if they are flipped up towards the center of the board
+-- KEYs are ON if they are pressed
+-- LEDGs are ON if one of them is lit up
+
+-- READING LEDG
+-- NOTE: counts how many programs have SUCCESSFULLY run. If you soft or hard reset halfway through a program's execution,
+-- the LEDGs will not show an increment.
+-- HEX7 to HEX0 form our SMDB. Each will light up correspondingly for a given program. 
+-- Hard reset will clear the LEDG counter
+-- The counter will count 16 program executions. On program 17 being 
+-- successfully executed, the LEDG's will roll back to 0 (all off).
+--
+--	SPEED CONTROLS
+-- SW(17) ON means your SMDB will scroll SUPER FAST
+-- SW(16) ON means your SMDB will scroll FAST
+-- When both SW(17) and SW(16) are down or up, the SMDB will run at regular speed
+-- Feel free to switch speeds in the middle of a program being executed. Have fun!!!
+-- 
+-- RESETS AND PAUSE
+-- Soft reset: this stops the program being executed such that the SMDB will display nothing.
+-- Hard Reset: like soft reset with the addition of clearing the LEDG program counter back to 0
+-- Pause: hitting key(3) will pause the program in the middle of execution 
+-- and the graphics being displayed currently will freeze on screen
+--
+-- TURNING ON A PROGRAM
+-- Use Switches 3 to 0 to control what is being used
+-- Only one switch can be on at a time. If you turn more than one switch on, a flashing ERROR message will display
+-- 				ex) Switch 3 ON will trigger program 4 to run
+--					ex) Switch 0 ON will trigger program 1 to run
+--					ex) Switch 3 and Switch 1 ON will trigger a flashing ERROR message to appear
+--
+--
+-- TROUBLESHOOTING ERROR
+-- While we may be geniuses, we also have limits ;-( 
+-- To any future engineer reading this manual, you should find a ToneGenerator component in SMDB top-level.
+-- Ideally, we can have a high-pitched ring coming out of earplugs plugged into the board whenever ERROR flashes
+--
